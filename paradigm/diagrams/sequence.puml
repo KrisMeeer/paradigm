@@ -1,0 +1,22 @@
+@startuml
+actor "Исследователь" as Researcher
+participant "Научный отдел" as Office
+participant "Проект" as Project
+participant "Преподаватель" as Lecturer
+participant "Сервис уведомлений" as Notify
+
+Researcher -> Office : Отправить заявку на проект
+Office -> Office : Оценить заявку
+alt Заявка одобрена
+    Office -> Project : Создать запись проекта
+    Office -> Lecturer : Назначить преподавателя
+    Lecturer --> Office : Подтвердить назначение
+
+    Researcher -> Project : Выполнить работу / отправить результаты
+    Project -> Office : Сообщить о завершении
+    Office -> Notify : Уведомить преподавателя и исследователя о завершении
+else Заявка отклонена
+    Office -> Researcher : Уведомить об отказе
+end
+
+@enduml

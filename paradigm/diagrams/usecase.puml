@@ -1,0 +1,46 @@
+@startuml
+left to right direction
+
+actor Student
+actor Lecturer
+actor Researcher
+actor AdministrativeStaff as Admin
+actor Dean
+
+rectangle "ИС университет" #B0C4DE {
+  rectangle "Student Portal" #ADD8E6 {
+    Student -- (View Courses)
+    Student -- (Register for Course)
+    Student -- (View Schedule)
+    Student -- (View Grades)
+  }
+
+  rectangle "Teaching & Research" #C6EFCE {
+    Lecturer -- (View Courses)
+    Lecturer -- (Assign Teaching)
+    Lecturer -- (Submit Grades)
+
+    Researcher -- (Create Project)
+    Researcher -- (Apply to Project)
+    Researcher -- (Publish Results)
+  }
+
+  rectangle "Administration" #FFF2CC {
+    Admin -- (Manage Department)
+    Admin -- (Manage Users)
+    Admin -- (Manage Courses)
+    Admin -- (Enroll Students)
+  }
+
+  rectangle "Faculty Office" #FFDAB9 {
+    Dean -- (Manage Faculty)
+    Dean -- (Approve Department Changes)
+    Dean -- (Assign Deans)
+  }
+}
+
+(Assign Teaching) .> (Manage Courses) : <<include>>
+(Register for Course) .> (View Courses) : <<include>>
+(Create Project) .> (Apply to Project) : <<include>>
+
+@enduml
